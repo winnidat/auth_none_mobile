@@ -37,9 +37,9 @@ function xmldb_auth_none_upgrade($oldversion) {
 
     if ($oldversion < 2017020700) {
         // Convert info in config plugins from auth/none to auth_none.
-        upgrade_fix_config_auth_plugin_names('none');
-        upgrade_fix_config_auth_plugin_defaults('none');
-        upgrade_plugin_savepoint(true, 2017020700, 'auth', 'none');
+        upgrade_fix_config_auth_plugin_names('none_mobile');
+        upgrade_fix_config_auth_plugin_defaults('none_mobile');
+        upgrade_plugin_savepoint(true, 2017020700, 'auth', 'none_mobile');
     }
 
     return true;
