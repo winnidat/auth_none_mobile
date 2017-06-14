@@ -27,11 +27,11 @@ defined('MOODLE_INTERNAL') || die;
 if ($ADMIN->fulltree) {
 
     // Introductory explanation.
-    $settings->add(new admin_setting_heading('auth_none/pluginname', '',
-        new lang_string('auth_nonedescription', 'auth_none')));
+    $settings->add(new admin_setting_heading('auth_none_mobile/pluginname', 'auth_none_mobile/pluginname',
+        new lang_string('auth_nonedescription', 'auth_none_mobile')));
 
     // Display locking / mapping of profile fields.
-    $authplugin = get_auth_plugin('none');
+    $authplugin = get_auth_plugin('none_mobile');
     display_auth_lock_options($settings, $authplugin->authtype, $authplugin->userfields,
         get_string('auth_fieldlocks_help', 'auth'), false, false);
 }
