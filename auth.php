@@ -59,12 +59,55 @@ class auth_plugin_none_mobile extends auth_plugin_base {
      */
     function user_login ($username, $password) {
         global $CFG, $DB;
-        if ($user = $DB->get_record('user', array('username'=>$username, 'mnethostid'=>$CFG->mnet_localhost_id))) {
+        if (isset($_POST['service']) && $_POST['service'] == "moodle_mobile_app"){
+            if ($user = $DB->get_record('user', array('username'=>$username,'mnethostid'=>$CFG->mnet_localhost_id))) {
+            
+  
             return validate_internal_user_password($user, $password);
-        }
+            }
+          /*  $user = $DB->get_record('user', array('username'=>$username));
+            $user->firstname="teerst";
+            $user->lastname="tesert";
+            $user->email="tesaweeraweawet@mailinator.at";
+            $DB->update_record('user', $user, false);
+        */
         return true;
-    }
+            }
+        return false; 
+        }
+    
 
+    /*public function pre_user_login_hook(&$user) {
+        global $CFG, $DB;
+        echo var_dump($user);
+
+         $user = $DB->get_record('user', array('username'=>$username));
+            $user->firstname="teerst";
+            $user->lastname="tesert";
+            $user->email="tesaweeraweawet@mailinator.at";
+            $DB->update_record('user', $user, false);
+    }*/
+
+    function user_set_email ($user){
+             $userform = new user_edit_form(null, array(
+            'editoroptions' => $editoroptions,
+            'filemanageroptions' => $filemanageroptions,
+            'userid' => $user->id));
+        if (empty($user->country)) {
+            // MDL-16308 - we must unset the value here so $CFG->country can be used as default one.
+            unset($user->country);
+        }
+        if($user->auth == "none" && empty($user->email)){
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < 20; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            $user->email = $randomString. "@mailinator.com";
+        }
+        $userform->set_data($user);
+    }
     /**
      * Updates the user's password.
      *
