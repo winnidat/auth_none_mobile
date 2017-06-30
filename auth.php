@@ -61,17 +61,9 @@ class auth_plugin_none_mobile extends auth_plugin_base {
         global $CFG, $DB;
         if (isset($_POST['service']) && $_POST['service'] == "moodle_mobile_app"){
             if ($user = $DB->get_record('user', array('username'=>$username,'mnethostid'=>$CFG->mnet_localhost_id))) {
-            
-  
-            return validate_internal_user_password($user, $password);
-            }
-          /*  $user = $DB->get_record('user', array('username'=>$username));
-            $user->firstname="teerst";
-            $user->lastname="tesert";
-            $user->email="tesaweeraweawet@mailinator.at";
-            $DB->update_record('user', $user, false);
-        */
-        return true;
+                return validate_internal_user_password($user, $password);
+                }            
+            return true;
             }
         return false; 
         }
