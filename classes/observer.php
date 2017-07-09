@@ -1,13 +1,13 @@
 <?
 
-
+ /*
 defined('MOODLE_INTERNAL') || die();
 namespace none_mobile;
 require_once($CFG->dirroot.'/user/profile/lib.php');
 
 class observer {
 
- /*	public static function user_created($event) {
+	public static function user_created($event) {
 		global $DB;
         $eventdata = $event->get_data();
        
