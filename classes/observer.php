@@ -1,22 +1,28 @@
-<?
+<?/*
 
- /*
+
 defined('MOODLE_INTERNAL') || die();
 namespace none_mobile;
 require_once($CFG->dirroot.'/user/profile/lib.php');
 
 class observer {
 
-	public static function user_created($event) {
-		global $DB;
+public static function user_created($event) {
+		
+        global $DB;
         $eventdata = $event->get_data();
-       
+        
+          if (!enrol_is_enabled('auto')) {
+            return;
+        }
         $user = $DB->get_record('user', array('id'=> $eventdata['objectid']));
         if(isset($_POST['firstname']) && $_POST['firstname'] != ''){
             $user->firstname = $_POST['firstname'];
         }
-        if($user->firstname == ''){
-            $user->firstname = $user->username;
+
+         $user->username='user'.$user->id;
+         if($user->firstname == ''){
+            $user->firstname = 'user';
         }
         
         if(isset($_POST['lastname']) && $_POST['lastname'] != ''){
@@ -31,8 +37,9 @@ class observer {
         if($user->email == ''){
         $user->email = $user->username."@mailinator.com";
         }
+
         
         $DB->update_record('user', $user, $bulk=false);
 	
-    }*/
+    }
 }
