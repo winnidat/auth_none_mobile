@@ -36,12 +36,12 @@ if ($ADMIN->fulltree) {
         get_string('auth_fieldlocks_help', 'auth'), false, false);
 
     // Generic E-Mail
-    $options = array(EXAMPLE => '   @example.com',
-                     MAILINATOR => '@mailinator.com',
+    $options = array('1' => '@example.com',
+                     '2' => '@mailinator.com',
                      );
 
     $settings->add(new admin_setting_configselect('auth_none_mobile/email',
-        'use E-Mail','', EXAMPLE, $options));
+        'use E-Mail','', '1', $options));
 
 
 
