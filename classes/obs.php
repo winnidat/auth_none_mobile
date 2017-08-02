@@ -10,32 +10,26 @@ class obs {
 public static function user_created($event) {
 		
         global $DB;
+        $domain = get_config('none_mobile', 'email');
         $eventdata = $event->get_data();
         
           if (!enrol_is_enabled('auto')) {
             return;
         }
         $user = $DB->get_record('user', array('id'=> $eventdata['objectid']));
-        if(isset($_POST['firstname']) && $_POST['firstname'] != ''){
-            $user->firstname = $_POST['firstname'];
-        }
 
          $user->username='user'.$user->id;
          if($user->firstname == ''){
             $user->firstname = 'user';
         }
         
-        if(isset($_POST['lastname']) && $_POST['lastname'] != ''){
-            $user->lastname = $_POST['lastname'];
-        }
         if($user->lastname == ''){
            $user->lastname = $user->id;
         }
-        if(isset($_POST['email']) && $_POST['email'] != ''){
-            $user->email = $_POST['email'];
-        }
+        
+    
         if($user->email == ''){
-        $user->email = $user->username."@mailinator.com";
+        $user->email = $user->username.$domain;
         }
 
         
