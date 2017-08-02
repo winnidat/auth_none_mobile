@@ -25,5 +25,5 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2017061800;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2017050500;        // Requires this Moodle version
+$plugin->requires  = 2017050800;        // Requires this Moodle version
 $plugin->component = 'auth_none_mobile';       // Full name of the plugin (used for diagnostics)
